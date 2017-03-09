@@ -53,11 +53,17 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I tried various combinations of parameters and after multiple trial and erro the following values were chosen for the HOG
+
+color_space = 'LUV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
+orient = 8  # HOG orientations
+pix_per_cell = 12 # HOG pixels per cell
+cell_per_block = 2 # HOG cells per block
+hog_channel = "ALL"
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+I trained a linear SVM (cell 14) using the spatial, histogram and HOG features. The extracted features were normalized fefore feeding them to the Linear SVM. Before training, I split the data into the train and test set. The test set is used to compute the accuracy of the Linear SVM.
 
 ###Sliding Window Search
 
