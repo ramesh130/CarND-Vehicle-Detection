@@ -19,4 +19,4 @@ Here are links to the labeled data for [vehicle](https://s3.amazonaws.com/udacit
 
 Some example images for testing your pipeline on single frames are located in the `test_images` folder.  To help the reviewer examine our work, we save examples of the output from each stage of your pipeline in the folder called `ouput_images`, and include them in our writeup for the project by describing what each image shows.    The video called `project_video.mp4` is the video our pipeline should work well on.  
 
-**As an optional challenge** Once we have a working pipeline for vehicle detection, add in your lane-finding algorithm from the last project to do simultaneous lane-finding and vehicle detection!
+**As an optional challenge** Once we have a working pipeline for vehicle detection, we will add in our lane-finding algorithm from the last project to do simultaneous lane-finding and vehicle detection!
