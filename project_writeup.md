@@ -55,11 +55,11 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 I tried various combinations of parameters and after multiple trial and erro the following values were chosen for the HOG
 
-color_space = 'LUV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
-orient = 8  # HOG orientations
-pix_per_cell = 12 # HOG pixels per cell
-cell_per_block = 2 # HOG cells per block
-hog_channel = "ALL"
+*color_space = 'LUV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
+*orient = 8  # HOG orientations
+*pix_per_cell = 12 # HOG pixels per cell
+*cell_per_block = 2 # HOG cells per block
+*hog_channel = "ALL"
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
