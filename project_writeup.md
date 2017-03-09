@@ -63,7 +63,7 @@ I tried various combinations of parameters and after multiple trial and erro the
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM (cell 14) using the spatial, histogram and HOG features. The extracted features were normalized fefore feeding them to the Linear SVM. Before training, I split the data into the train and test set. The test set is used to compute the accuracy of the Linear SVM.
+I trained a linear SVM (cell 14) using the spatial, histogram and HOG features. The extracted features were normalized before feeding them to the Linear SVM. Before training, I split the data into the train and test set. The test set is used to compute the accuracy of the Linear SVM. The trained model is saved as a pickle file to be used for prediction in later steps.
 
 ###Sliding Window Search
 
