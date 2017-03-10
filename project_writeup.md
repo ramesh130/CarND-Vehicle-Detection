@@ -55,6 +55,15 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 I tried various combinations of parameters and after multiple trial and erro the following values were chosen for the HOG
 
+###Other features
+
+Apart from HOG, I also used two other features -
+* Color Histogram (Cell 12)
+I take the color histogram of each color channel and concatenate them together. Then I divide the histogram into 32 bins. 
+
+* Spatial Binning (Cell 6)
+I do a spatial binning after resizing the image to 32x32.
+
 * color_space = 'LUV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
 * orient = 8  # HOG orientations
 * pix_per_cell = 12 # HOG pixels per cell
