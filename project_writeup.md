@@ -55,6 +55,12 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 I tried various combinations of parameters and after multiple trial and erro the following values were chosen for the HOG
 
+* color_space = 'LUV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
+* orient = 8  # HOG orientations
+* pix_per_cell = 12 # HOG pixels per cell
+* cell_per_block = 2 # HOG cells per block
+* hog_channel = "ALL"
+
 ###Other features
 
 Apart from HOG, I also used two other features -
@@ -64,21 +70,15 @@ I take the color histogram of each color channel and concatenate them together. 
 * Spatial Binning (Cell 6)
 I do a spatial binning after resizing the image to 32x32.
 
-* color_space = 'LUV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
-* orient = 8  # HOG orientations
-* pix_per_cell = 12 # HOG pixels per cell
-* cell_per_block = 2 # HOG cells per block
-* hog_channel = "ALL"
-
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM (cell 14) using the spatial, histogram and HOG features. The extracted features were normalized before feeding them to the Linear SVM. Before training, I split the data into the train and test set. The test set is used to compute the accuracy of the Linear SVM. The trained model is saved as a pickle file to be used for prediction in later steps.
+I trained a linear SVM (cell 14) using the spatial binning, color histogram and HOG features. The extracted features were normalized before feeding them to the Linear SVM. Before training, I split the data into the train and test set. The test set is used to compute the accuracy of the Linear SVM. The trained model is saved as a pickle file to be used for prediction in later steps.
 
 ###Sliding Window Search
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and based on the false positives and negatives, decoded to use the scales of 1 and 2 for optimum detection.
+Sliding window is implemented in Cell 16. After comparing the size of vehicles with respect to the camera and prediction accuracy, I decided to use the scales of 1 and 2 (window sizes 64 and 128) for optimum detection.
 
 ![alt text][image3]
 
