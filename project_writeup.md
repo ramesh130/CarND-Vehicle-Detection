@@ -16,9 +16,9 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 [image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
-[image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
+[image2]: ./examples/HOG_example.png
+[image3]: ./examples/sliding_windows.png
+[image4]: ./examples/sliding_window.png
 [image5]: ./examples/bboxes_and_heat.png
 [image6]: ./examples/labels_map.png
 [image7]: ./examples/output_bboxes.png
@@ -37,9 +37,7 @@ You're reading it!
 ###Histogram of Oriented Gradients (HOG)
 
 ####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
-
-HOG is implemented as 'get_hog_features' in cell 10 of the IPython notebook. Cell 11 uses the method 'get_hog_features' to visualize the HOG.
-
+The code for this step is contained in the the files `feature_extration.py`. HOG is implemented as `hog_features` in `feature_extration.py`. 
 I started by reading in all the `vehicle` and `non-vehicle` images (cell 9).  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![alt text][image1]
@@ -48,15 +46,14 @@ I then explored different color spaces and different `skimage.hog()` parameters 
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
-
 ![alt text][image2]
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and after multiple trial and erro the following values were chosen for the HOG
+I tried various combinations of parameters and after multiple trial and error the following values were chosen for the HOG
 
-* color_space = 'LUV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
-* orient = 8  # HOG orientations
+* color_space = 'YCrCb' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
+* orient = 9  # HOG orientations
 * pix_per_cell = 12 # HOG pixels per cell
 * cell_per_block = 2 # HOG cells per block
 * hog_channel = "ALL"
@@ -71,20 +68,20 @@ I take the color histogram of each color channel and concatenate them together. 
 I do a spatial binning after resizing the image to 32x32.
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
-
-I trained a linear SVM (cell 14) using the spatial binning, color histogram and HOG features. The extracted features were normalized before feeding them to the Linear SVM. Before training, I split the data into the train and test set. The test set is used to compute the accuracy of the Linear SVM. The trained model is saved as a pickle file to be used for prediction in later steps.
+The code for this step is contained in the the files `train.py`.
+I trained a linear SVC in method `train()` using the spatial binning, color histogram and HOG features. The extracted features were normalized before feeding them to the Linear SVC. Before training, I split the data into the train and test set. The test set is used to compute the accuracy of the Linear SVC. The trained model is saved as a pickle file to be used for prediction in later steps.
 
 ###Sliding Window Search
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
-
-Sliding window is implemented in Cell 16. After comparing the size of vehicles with respect to the camera and prediction accuracy, I decided to use the scales of 1 and 2 (window sizes 64 and 128) for optimum detection.
+The code for this step is contained in the the files `sliding_window.py`.
+After comparing the size of vehicles with respect to the camera and prediction accuracy, I decided to use the scales of 1 and 2 (window sizes 64 and 128) for optimum detection. Moreover a `Region of Interest` is used to reduce the area that is searched.
 
 ![alt text][image3]
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
-
-Cell 25 implements the processing of image using the pipeline and the outcome. Ultimately I searched on two scales - 1 and 2, using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+The code for this step is contained in the the files `detect.py`.
+Ultimately I searched on two scales - 1 and 2, using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
 ![alt text][image4]
 ---
@@ -92,7 +89,8 @@ Cell 25 implements the processing of image using the pipeline and the outcome. U
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Cell 27 and 28 implement the processing pipeline being applied to the video. Here's a [link to my video result](./project_video.mp4)
+The code for this step is contained in the the files `convert_video.py`.
+Here's a [link to my video result](./output_images/project_video.mp4)
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
@@ -118,5 +116,7 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Challenges: Identifying features and thresholds.
+
+Recommendations: The algorithm is dependent on the features chosen and the thresholds selected. This makes it prone to error if the conditions on the road differ vastly from the data used for calculations. Better approach would be to use Deep Learning for identifying the cars.
 
