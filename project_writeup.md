@@ -17,10 +17,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 [image1]: ./examples/car_not_car.png
 [image2]: ./examples/HOG_example.png
-[image3]: ./examples/sliding_windows.png
-[image4]: ./examples/sliding_window.png
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
+[image3]: ./examples/bbox1.png
 [image7]: ./examples/output_bboxes.png
 [video1]: ./project_video.mp4
 
@@ -77,13 +74,11 @@ I trained a linear SVC in method `train()` using the spatial binning, color hist
 The code for this step is contained in the the files `sliding_window.py`.
 After comparing the size of vehicles with respect to the camera and prediction accuracy, I decided to use the scales of 1 and 2 (window sizes 64 and 128) for optimum detection. Moreover a `Region of Interest` is used to reduce the area that is searched.
 
-![alt text][image3]
-
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 The code for this step is contained in the the files `detect.py`.
 Ultimately I searched on two scales - 1 and 2, using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
-![alt text][image4]
+![alt text][image3]
 ---
 
 ### Video Implementation
@@ -97,13 +92,6 @@ Here's a [link to my video result](./output_images/project_video.mp4)
 I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
-
-### Here are six frames and their corresponding heatmaps:
-
-![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
 ![alt text][image7]
